@@ -21,6 +21,8 @@ namespace Reproductor
         private int cantidadMuestrasTranscurridas = 0;
         private int cantidadMuestrasBorradas = 0;
 
+        public bool Activo = false;
+
         public WaveFormat WaveFormat
         {
             get
@@ -59,12 +61,15 @@ namespace Reproductor
                 bufferDelay.RemoveRange(0, diferencia);
                 cantidadMuestrasBorradas += diferencia;
             }
-            //Aplicar el efecto
-            if(milisegundosTranscurridos > offsetMilisegundos)
+            if (Activo)
             {
-                for(int i = 0; i<read; i++)
+                //Aplicar el efecto
+                if (milisegundosTranscurridos > offsetMilisegundos)
                 {
-                    buffer[offset + i] += bufferDelay[cantidadMuestrasTranscurridas - cantidadMuestrasBorradas + i - cantidadMuestrasOffset];
+                    for (int i = 0; i < read; i++)
+                    {
+                        buffer[offset + i] += bufferDelay[cantidadMuestrasTranscurridas - cantidadMuestrasBorradas + i - cantidadMuestrasOffset];
+                    }
                 }
             }
 

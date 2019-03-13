@@ -196,5 +196,17 @@ namespace Reproductor
 
             }
         }
+
+        private void CbDelayActivity_Click(object sender, RoutedEventArgs e)
+        {
+            if (delay != null)
+            {
+
+                delay.Activo = (bool)CbDelayActivity.IsChecked;
+
+
+
+            }
+        }
     }
 }
